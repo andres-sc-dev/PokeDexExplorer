@@ -1,4 +1,4 @@
-//vista de lista: titulo, buscador y cuadrícula de 2 columnas con scroll infinito
+//muestro la lista de pokemon con el titulo, el buscador y las tarjetas en dos columnas
 
 import { useState } from 'react';
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, View } from 'react-native';
@@ -7,21 +7,22 @@ import PokemonCard from '../components/PokemonCard';
 import { ErrorMessage, LoadingMessage } from '../components/StatusMessage';
 import usePokemonList from '../hooks/usePokemonList';
 
-//onSelectPokemon: avisa a App que pokemon se quiere ver (por id o por texto buscado)
+//le aviso a App cual pokemon quiero ver, usando el id o el nombre que busque
 export default function PokemonListScreen({ onSelectPokemon }) {
   const { pokemon, loading, error, loadMore, retry } = usePokemonList();
   const [searchText, setSearchText] = useState('');
 
   const handleSearch = () => {
-    const clean = searchText.trim().toLowerCase(); //ignora mayusculas y espacios
-    if (clean === '') return; //si no escribio nada, pues nada se hace
+  const clean = searchText.trim().toLowerCase(); //quito los espacios y paso el texto a minusculas
+    if (clean === '') return; //si no escribio nada, no hago nada
     onSelectPokemon(clean);
-  };
+    setSearchText(''); //limpio el buscador para cuando vuelva a la lista
+    };
 
-  //estados cuando todavia no hay ningun pokemon en pantalla
+  //reviso si todavia no hay pokemon cargados
   const isFirstLoad = pokemon.length === 0;
 
-  // pie de la lista: indicador mientras carga mas, o error con "reintentar"
+  //muestro un indicador mientras carga mas pokemon o un boton si ocurre un error
   const renderFooter = () => {
     if (loading && !isFirstLoad) {
       return <ActivityIndicator style={styles.footer} size="small" color="#E3350D" />;
@@ -44,7 +45,7 @@ export default function PokemonListScreen({ onSelectPokemon }) {
         </View>
       <SearchBar value={searchText} onChangeText={setSearchText} onSearch={handleSearch} />
 
-      {/*estados de la primera carga*/}
+      {/*muestro los mensajes mientras carga la lista por primera vez*/}
       {isFirstLoad && loading && <LoadingMessage text="Cargando Pokémon..." />}
       {isFirstLoad && error && (
         <ErrorMessage
@@ -53,17 +54,17 @@ export default function PokemonListScreen({ onSelectPokemon }) {
         />
       )}
 
-      {/*estado exito: la lista*/}
+      {/*cuando ya hay pokemon cargados, muestro la lista*/}
       {!isFirstLoad && (
-        //concepto: flatList en vez de ScrollView + map para listas largas
+        //uso FlatList porque funciona mejor con listas largas que ScrollView y map
         <FlatList
           data={pokemon}
-          keyExtractor={(item) => String(item.id)} //clave unica por elemento
-          numColumns={2} //cuadricula de 2 columnas
+          keyExtractor={(item) => String(item.id)} //cada pokemon tiene su propia clave
+          numColumns={2} //muestro dos tarjetas por fila
           contentContainerStyle={styles.list}
           renderItem={({ item }) => <PokemonCard pokemon={item} onPress={onSelectPokemon} />}
-          onEndReached={loadMore} //scroll infinito: al llegar al final pide 20 mas
-          onEndReachedThreshold={0.5} //empieza a cargar cuando falta media pantalla
+          onEndReached={loadMore} //cuando llego al final, carga 20 pokemon mas
+          onEndReachedThreshold={0.5} //empieza a cargar cuando queda media pantalla
           ListFooterComponent={renderFooter}
         />
       )}
