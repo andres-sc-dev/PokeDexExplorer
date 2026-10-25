@@ -37,9 +37,9 @@ Organicé el código en varias carpetas para mantener separadas las pantallas, l
 ## Capturas de pantalla
 | Lista de Pokémon | Ficha del Pokémon |
 |---|---|
-| ![Cargando](screenshots/Cargando.png) | ![Detalle](screenshots/Detalle.png) |
+| ![Cargando](screenshots/Cargando.png) | ![Detalle](screenshots/Exito.png) |
 |---|---|
-| ![Error de conexión](screenshots/error.png) | ![Pokémon no encontrado](screenshots/sinresultados.png) |
+| ![Error de conexión](screenshots/Error.png) | ![Pokémon no encontrado](screenshots/sinresultados.png) |
 
 ## Reflexión del proyecto
 
