@@ -1,3 +1,5 @@
+//colores suaves para el fondo de las tarjetas de la lista, se repiten segun el id
+export const CARD_COLORS = ['#FDE8E4', '#E4F1FD', '#E6F7E4', '#FFF5D6', '#F1E6FA', '#E0F7F5'];
 //datos fijos de la app: colores y traducciones
 //los puse en un archivo aparte para no llenar los componentes de objetos gigantes
 

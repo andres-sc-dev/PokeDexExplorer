@@ -39,8 +39,9 @@ export default function PokemonListScreen({ onSelectPokemon }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>PokéDex Explorer</Text>
-
+        <View style={styles.header}>
+            <Text style={styles.title}>PokeDex Explorer</Text>
+        </View>
       <SearchBar value={searchText} onChangeText={setSearchText} onSearch={handleSearch} />
 
       {/*estados de la primera carga*/}

@@ -3,9 +3,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { MAX_STAT_VALUE, STAT_NAMES_ES } from '../constants/pokemonData';
 
-export default function StatBar({ name, value }) {
+export default function StatBar({ name, value, color = '#E3350D' }) {
   //calculo que porcentaje representa el valor de la estadistica
-  const percentage = (value / MAX_STAT_VALUE) * 100;
+  //limito la barra al 100% por si algun valor supera el maximo
+  const percentage = Math.min((value / MAX_STAT_VALUE) * 100, 100);
 
   return (
     <View style={styles.row}>
@@ -13,7 +14,7 @@ export default function StatBar({ name, value }) {
       <Text style={styles.value}>{value}</Text>
       <View style={styles.track}>
         {/*el ancho de la barra depende del porcentaje que calcule*/}
-        <View style={[styles.fill, { width: percentage + '%' }]} />
+        <View style={[styles.fill, { width: percentage + '%', backgroundColor: color }]} />
       </View>
     </View>
   );
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 4,
+    marginVertical: 5,
   },
   label: {
     width: 110,
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
   },
   fill: {
     height: '100%',
-    backgroundColor: '#E3350D',
     borderRadius: 5,
   },
 });
