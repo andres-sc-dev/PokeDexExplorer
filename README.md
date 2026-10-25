@@ -35,9 +35,10 @@ Organicé el código en varias carpetas para mantener separadas las pantallas, l
 - **Permitir búsquedas por nombre o número :** la aplicación limpia los espacios sobrantes y convierte el texto a minúsculas antes de buscar.
 
 ## Capturas de pantalla
-| Lista de Pokémon | Ficha del Pokémon |
+| Cargando | Exito |
 |---|---|
 | ![Cargando](screenshots/Cargando.png) | ![Detalle](screenshots/Exito.png) |
+| Error | Sin Resultados |
 |---|---|
 | ![Error de conexión](screenshots/Error.png) | ![Pokémon no encontrado](screenshots/sinresultados.png) |
 
